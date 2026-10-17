@@ -1,0 +1,62 @@
+@UserManagementAPI_HostAddress = http://localhost:5148
+@token = replace-with-valid-jwt-from-your-identity-provider
+
+### Get all users
+GET {{UserManagementAPI_HostAddress}}/api/users
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get a user by ID
+GET {{UserManagementAPI_HostAddress}}/api/users/1
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Create a user
+POST {{UserManagementAPI_HostAddress}}/api/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Ana García",
+  "email": "ana.garcia@techhive.example",
+  "department": "Human Resources"
+}
+
+### Update a user
+PUT {{UserManagementAPI_HostAddress}}/api/users/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Ana García",
+  "email": "ana.garcia@techhive.example",
+  "department": "Information Technology"
+}
+
+### Delete a user
+DELETE {{UserManagementAPI_HostAddress}}/api/users/1
+Authorization: Bearer {{token}}
+
+### API request without a token (401)
+GET {{UserManagementAPI_HostAddress}}/api/users
+Accept: application/problem+json
+
+### Get a user that does not exist (404)
+GET {{UserManagementAPI_HostAddress}}/api/users/999999
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Create a user with invalid fields (400)
+POST {{UserManagementAPI_HostAddress}}/api/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "   ",
+  "email": "invalid-email",
+  "department": "Human Resources"
+}
+
+### OpenAPI document (available in Development)
+GET {{UserManagementAPI_HostAddress}}/openapi/v1.json
+Accept: application/json
